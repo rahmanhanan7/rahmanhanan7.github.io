@@ -84,3 +84,20 @@ languageName = "English"
 [params]
   # Website description, shown on homepage under the title
   description = "Welcome to my blog — Exploring Linux, DevOps, Networking & Cloud 🚀"
+
+  # Header title config (controls the navbar brand text)
+  [params.header]
+    [params.header.title]
+      name = "Hanan PP"
+
+  # Global author settings used in post metadata
+  [params.author]
+    name = "Hanan PP"
+    link = ""
+
+  # Home page profile (controls the large title on the homepage)
+  [params.home]
+    [params.home.profile]
+      enable = true
+      title = "Welcome to my blog — Exploring Linux, DevOps, Networking & Cloud 🚀"
+      subtitle = ""
