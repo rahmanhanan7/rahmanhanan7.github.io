@@ -1,18 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>All Posts - Hanan PP</title>
-        <link>http://localhost:1313/posts/</link>
+        <link>http://example.org/posts/</link>
         <description>All Posts | Hanan PP</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 25 Aug 2025 17:30:47 &#43;0530</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>First_post</title>
-    <link>http://localhost:1313/posts/first_post/</link>
-    <pubDate>Mon, 25 Aug 2025 17:30:47 &#43;0530</pubDate>
-    <author>xxxx</author>
-    <guid>http://localhost:1313/posts/first_post/</guid>
-    <description><![CDATA[Hello World 👋 This is my very first post on this website, and I&rsquo;m excited to finally hit publish!
-I’ve been exploring Hugo, and I really like how fast and simple it is. Writing posts in plain Markdown feels natural, and I don’t have to worry about heavy setups.
-What you can expect from this site:
-Notes and experiments as I learn new tech stuff Tips and guides that might help others Maybe some personal thoughts along the way Thanks for stopping by!]]></description>
-</item>
-</channel>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 25 Aug 2025 17:30:47 &#43;0530</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /></channel>
 </rss>
