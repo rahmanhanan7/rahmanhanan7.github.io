@@ -68,12 +68,6 @@ languageName = "English"
     prefix = "mailto:"
     title = "Email"
 
-  [params.social.Phone]
-    weight = 2
-    id = "+919048763968"
-    prefix = "tel:"
-    title = "Phone"
-
 # Markup related configuration in Hugo
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)

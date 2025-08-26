@@ -3,9 +3,18 @@
         <title>Hanan PP</title>
         <link>http://localhost:1313/</link>
         <description>Welcome to my blog — Exploring Linux, DevOps, Networking &amp; Cloud 🚀</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 25 Aug 2025 17:30:47 &#43;0530</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 26 Aug 2025 09:46:47 &#43;0530</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>pfSense Gateway Alerts</title>
+    <link>http://localhost:1313/posts/pfsense-gateway-alert/</link>
+    <pubDate>Tue, 26 Aug 2025 09:46:47 &#43;0530</pubDate>
+    <author>Hanan PP</author>
+    <guid>http://localhost:1313/posts/pfsense-gateway-alert/</guid>
+    <description><![CDATA[How to Get Alerts When Your Gateway Changes in pfSense or OPNsense If you use pfSense or OPNsense, you know how important gateways are—they decide how your internet traffic leaves your network. But sometimes, gateways switch without you noticing. This could be because of:
+Failover in a multi-WAN setup ISP issues Wrong configuration What This Does I made a small script that checks your gateways and sends an alert if one changes.]]></description>
+</item>
+<item>
     <title>First_post</title>
     <link>http://localhost:1313/posts/first_post/</link>
     <pubDate>Mon, 25 Aug 2025 17:30:47 &#43;0530</pubDate>

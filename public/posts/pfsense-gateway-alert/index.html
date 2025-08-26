@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>pfSense Gateway Alerts - Hanan PP</title><meta name="Description" content="Welcome to my blog — Exploring Linux, DevOps, Networking &amp; Cloud 🚀"><meta property="og:url" content="http://localhost:1313/posts/pfsense-gateway-alert/">
+  <meta property="og:site_name" content="Hanan PP">
+  <meta property="og:title" content="pfSense Gateway Alerts">
+  <meta property="og:description" content="How to Get Alerts When Your Gateway Changes in pfSense or OPNsense If you use pfSense or OPNsense, you know how important gateways are—they decide how your internet traffic leaves your network. But sometimes, gateways switch without you noticing. This could be because of:
+Failover in a multi-WAN setup ISP issues Wrong configuration What This Does I made a small script that checks your gateways and sends an alert if one changes.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-26T09:46:47+05:30">
+    <meta property="article:modified_time" content="2025-08-26T09:46:47+05:30">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pfSense Gateway Alerts">
+  <meta name="twitter:description" content="How to Get Alerts When Your Gateway Changes in pfSense or OPNsense If you use pfSense or OPNsense, you know how important gateways are—they decide how your internet traffic leaves your network. But sometimes, gateways switch without you noticing. This could be because of:
+Failover in a multi-WAN setup ISP issues Wrong configuration What This Does I made a small script that checks your gateways and sends an alert if one changes.">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/pfsense-gateway-alert/" /><link rel="prev" href="http://localhost:1313/posts/first_post/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "pfSense Gateway Alerts",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/pfsense-gateway-alert\/"
+        },"genre": "posts","wordcount":  274 ,
+        "url": "http:\/\/localhost:1313\/posts\/pfsense-gateway-alert\/","datePublished": "2025-08-26T09:46:47+05:30","dateModified": "2025-08-26T09:46:47+05:30","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Hanan PP"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Hanan PP">Hanan PP</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Hanan PP">Hanan PP</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">pfSense Gateway Alerts</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-08-26">2025-08-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;274 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-this-does">What This Does</a></li>
+        <li><a href="#steps-to-set-it-up">Steps to Set It Up</a></li>
+      </ul>
+    </li>
+    <li><a href="#customization">Customization</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="how-to-get-alerts-when-your-gateway-changes-in-pfsense-or-opnsense">How to Get Alerts When Your Gateway Changes in pfSense or OPNsense</h1>
+<p>If you use pfSense or OPNsense, you know how important gateways are—they decide how your internet traffic leaves your network. But sometimes, gateways switch without you noticing. This could be because of:</p>
+<ul>
+<li>Failover in a multi-WAN setup</li>
+<li>ISP issues</li>
+<li>Wrong configuration</li>
+</ul>
+<h3 id="what-this-does">What This Does</h3>
+<p>I made a small script that checks your gateways and sends an alert if one changes. Out of the box, it sends alerts to Google Chat, but you can easily change it to send to Slack, Telegram, Email, Grafana, or whatever tool you use.</p>
+<h3 id="steps-to-set-it-up">Steps to Set It Up</h3>
+<h4 id="1-get-the-script">1. Get the Script</h4>
+<p>Download the script <a href="https://github.com/rahmanhanan7/Pfsense-GW-change-alert/blob/main/gateway_check.php" target="_blank" rel="noopener noreffer ">gateway_check.php</a> from GitHub and upload it to your pfSense or OPNsense box.</p>
+<h4 id="2-upload--make-it-executable">2. Upload &amp; Make It Executable</h4>
+<p>Connect to your firewall with SSH:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh admin@&lt;your-pfsense-ip&gt;</span></span></code></pre></div></div>
+<p>Go to the shell, put the script in a folder, then run:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x /path/to/gateway_check.php</span></span></code></pre></div></div>
+<h4 id="3-edit-the-script">3. Edit the Script</h4>
+<p>Open the file and update two things:</p>
+<ul>
+<li>Add your Google Chat webhook URL</li>
+<li>Map your gateway IPs (use public IP address) to names, like:</li>
+</ul>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="s2">&#34;192.168.1.1&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;ISP_1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;10.0.0.1&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;ISP_2&#34;</span></span></span></code></pre></div></div>
+<h4 id="4-automate-with-cron">4. Automate with Cron</h4>
+<p>Install the Cron package in pfSense/OPNsense:</p>
+<ul>
+<li>Go to System → Package Manager → Available Packages</li>
+<li>Install Cron</li>
+</ul>
+<p>Then create a cron job that runs the script every minute (or however often you like).</p>
+<h4 id="5-test-it">5. Test It</h4>
+<p>Unplug or disable one WAN connection. You should get a message when the gateway changes.</p>
+<h2 id="customization">Customization</h2>
+<p>You can make the script send alerts to:</p>
+<ul>
+<li>Email</li>
+<li>Slack</li>
+<li>Telegram</li>
+</ul>
+<p>Or any other tool you prefer, and if you want, you can expand it to track other network events too.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-08-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/pfsense-gateway-alert/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/pfsense-gateway-alert/" data-title="pfSense Gateway Alerts" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fpfsense-gateway-alert%2f&amp;text=pfSense%20Gateway%20Alerts" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/first_post/" class="prev" rel="prev" title="First_post"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>First_post</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.131.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Hanan PP</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{}};</script><script src="/js/theme.min.js"></script></body>
+</html>
